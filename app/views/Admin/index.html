@@ -1,0 +1,42 @@
+#{extends 'main.html' /}
+#{set title:'Modules List' /}
+
+<h1>List of Modules :</h1>
+
+#{list items:modules, as:'module'}
+    <ul>
+    <li><span>#{a @Admin.show(module.id)}${module.name} : ${module.fullname}#{/a}</span><span>&nbsp;#{a @Admin.delete(module.id)}<img width="16" height="16" src="@@{'/public/images/delete.png'}" alt="Delete" title="Delete" >#{/a}</span></li>
+    </ul>
+#{/list}    
+#{else}
+    <label>There is no Module in this repository.</label>
+#{/else}
+
+<div class="buttons"><button id="addModuleCommand" type="submit" class="positive">Add a module</button></div>
+
+<div id="addModule" style="display:none;">
+#{form @Admin.add()}
+    <p>
+        <label>Name :</label>
+        <input type="text" name="name" />
+    </p>
+    <p>
+        <label>Full Name :</label>
+        <input type="text" name="fullname" />
+    </p>
+    <p>
+        <input type="submit" value="Add" />
+    </p>
+    
+#{/form}
+</div>
+
+<script>
+    $("#addModuleCommand").click(function () {
+      if ($("#addModule").is(":visible")) {
+    	  $("#addModule").hide();
+      } else {
+    	  $("#addModule").show();
+      }
+    });
+</script>

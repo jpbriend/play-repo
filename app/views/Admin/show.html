@@ -1,0 +1,73 @@
+#{extends 'main.html' /}
+#{set title:'Module' /}
+
+<div>
+<h1>Module ${module.name}</h1>
+<h2>${module.fullname}</h2>
+
+#{ifErrors}
+  <p class="error">Error(s) found :</p>
+#{/ifErrors}
+<ul class="error">
+#{errors}
+    <li>${error}</li>
+#{/errors}
+</ul>
+
+<label>Versions :</label>
+
+#{if module.versions.size() > 0}
+    <ul>
+    #{list items:module.versions, as:'version'}
+        <li>${version.version}&nbsp;#{a @Admin.download(module.id, version.id)}Download#{/a}</li>
+    #{/list}
+    </ul>
+
+#{/if}
+#{else}
+    <label>No version available for this module.</label>
+#{/else}
+
+<div class="buttons"><button id="addVersionCommand" type="submit" class="positive">Add a Version</button></div>
+
+<div id="addVersion" style="display:none;">
+
+<form action="@{Admin.addVersion()}" method="POST" enctype="multipart/form-data">
+    <p>
+        <label>Version :</label>
+        <input type="text" name="version.version" />
+        <input type="hidden" name="id" value="${module.id}" />
+    </p>
+    <p>
+        <label>Is Default :</label>
+        <div><input type="radio" id="isDefaultTrue" name="version.isDefault" value="true"/><label for="isDefaultTrue">True</label></div>
+        <div><input type="radio" id="isDefaultFalse" name="version.isDefault" value="false" /><label for="isDefaultFalse">False</label></div>
+    </p>
+    <p>
+        <label>Matches version of Play! framework:</label>
+        <input type="text" name="version.matches" />
+    </p>
+    <p>
+        <label>Artefact:</label>
+        <input type="file" name="artefact" />
+    </p>
+    <p>
+        <input type="submit" value="Add" />
+    </p>
+    
+</form>
+</div>
+
+<script>
+    $("#addVersionCommand").click(function () {
+      if ($("#addVersion").is(":visible")) {
+          $("#addVersion").hide();
+      } else {
+          $("#addVersion").show();
+      }
+    });
+</script>
+
+<p>#{a @Admin.index()}Back to Modules index#{/a}</p>
+
+</div>

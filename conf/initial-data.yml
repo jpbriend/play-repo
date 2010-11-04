@@ -1,0 +1,22 @@
+#Version(1.0):
+#    version: 1.0
+#    isDefault: true
+#    matches: 1.1
+
+Version(head):
+    version: head
+    isDefault: true
+    matches: 1.1RC3
+
+Version(1.1RC3):
+    version: 1.1RC3
+    isDefault: false
+    matches: 1.1RC3
+
+Module(maven):
+    name: maven
+    fullname: Play Maven
+    versions:
+        - 1.1RC3
+        - head
+    

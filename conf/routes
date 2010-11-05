@@ -5,9 +5,8 @@
 # Home page
 GET     /modules                                Application.index(format:'json')
 GET     /admin/modules                          Admin.index
-*     /admin/modules/{action}                   Admin.{action}
-                    
-GET     /modules/{name}-{version}.zip           Application.download
+*       /admin/modules/{action}                 Admin.{action}
+*       /modules/{name}-{version}.zip           Application.download
 GET     /modules/{name}                         Application.detail(format:'json')
 
 

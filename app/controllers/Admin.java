@@ -65,7 +65,7 @@ public class Admin extends Controller {
                 try {
                     fis = new FileInputStream(artefact);
                     version.artefact = new Blob();
-                    version.artefact.set(fis, "zip");
+                    version.artefact.set(fis, "application/zip");
                 } catch (FileNotFoundException e) {
                     Logger.error("Error while retrieving attachment :" + e.getMessage(), e);
                 } finally {

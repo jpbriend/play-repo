@@ -2,12 +2,13 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-# Home page
-GET     /modules                                Application.index(format:'json')
-GET     /admin/modules                          Admin.index
+GET     /admin/modules/?                        Admin.index
 *       /admin/modules/{action}                 Admin.{action}
+
+GET		/										Application.index
+GET     /modules                                Application.modules
 *       /modules/{name}-{version}.zip           Application.download
-GET     /modules/{name}                         Application.detail(format:'json')
+GET     /modules/{name}                         Application.module(format:'json')
 
 
 # Map static resources from the /app/public folder to the /public path

@@ -1,19 +1,29 @@
 package controllers;
 
+import java.text.Format;
+
 import models.Module;
 import models.Modules;
 import models.Version;
 import play.mvc.Controller;
 
 public class Application extends Controller {
+	
+	public static void index() {
+		render();
+	}
 
-    public static void index() {
+    public static void modules() {
         Modules modules = new Modules();
         modules.modules = Module.findAll();
-        renderJSON(modules);
+        if (request.format == "json") {
+        	renderJSON(modules);
+        } else {
+        	render(modules);
+        }
     }
 
-    public static void detail(String name) {
+    public static void module(String name) {
         Module module = Module.find("byName", name).first();
         renderJSON(module);
     }

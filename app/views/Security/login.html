@@ -1,0 +1,18 @@
+#{extends 'content.html' /}
+#{set title:'Play-repo' /}
+
+<h1>Login</h1>
+
+<h2>Please, authenticate yourself</h2>
+
+<p>Use your OpenID to authenticate.</p>
+
+#{if flash.error}
+    <p style="color:red;font-weight: bold;">${flash.error}</p>
+#{/if}
+
+#{form @Security.authenticate()}
+    <label for="user">What's your OpenID?</label>
+    <input type="text" name="user" id="user"/>
+    <input type="submit" value="login..."/>
+#{/form}

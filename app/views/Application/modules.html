@@ -1,4 +1,16 @@
-#{extends 'main.html' /}
+#{extends 'content.html' /}
 #{set title:'Play-repo' /}
 
-<h1>Listing all modules on the repository.</h1>
+<h1>List of modules</h1>
+
+<p>Here the complete list of all the modules hosted inside this repository.</p>
+
+<div id="modules">
+#{list items:modules.modules, as:'module'}
+    <div class="module">
+        <h2>[${module.name}]&nbsp;${module.fullname}</h2>
+        <p>${module.description}</p>
+        <p>#{a @Application.module(module.name)}Get details and versions#{/a}</p>
+    </div>
+#{/list}
+</div>

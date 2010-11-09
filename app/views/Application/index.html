@@ -1,4 +1,16 @@
-#{extends 'main.html' /}
+#{extends 'content.html' /}
 #{set title:'Play-repo' /}
 
-<h1>Welcome on the Play-repo repository.</h1>
+<h1>Home</h1>
+
+<p>
+This repository contains Play! modules. 
+</p>
+
+<h2>List the modules</h2>
+
+<p>If you want to list all the Play! modules hosted on this repository, use this link : #{a @Application.modules()}List all the modules#{/a}</p>
+
+<h2>Administer the modules</h2>
+
+<p>If you want to administer the modules, use this link (authentication required) : #{a @Admin.index()}Admin#{/a}</p>

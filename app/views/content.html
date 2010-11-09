@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+
+<div id="top">
+    <div class="wrapper">
+    <p class="category">Welcome to the Play-repo repository</p>
+    </div>
+</div>
+
+<div class="wrapper">
+    <div id="submenu">
+        <h2>Menu</h2>
+        <ul class="sidemenu">
+            <li>#{a @Application.index()}Home#{/a}</li>
+            <li>#{a @Application.modules()}List all the modules#{/a}</li>
+            <li>#{a @Admin.index()}Admin#{/a}</li>
+        </ul>
+        <br />
+        <ul class="sidemenu">
+            #{if !session.contains("username")}
+                <li>#{a @Secure.login()}Login#{/a}</li>
+            #{/if}
+            #{else}
+                <li>#{a @Secure.logout()}Logout#{/a}</li>
+            #{/else}
+        </ul>
+    </div>
+    <div id="pageContent">
+        <div class="wikistyle">
+            #{doLayout /}
+        </div>    
+    </div>
+</div>
+

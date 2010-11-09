@@ -8,7 +8,10 @@ GET     /admin/modules/?                        Admin.index
 GET		/										Application.index
 GET     /modules                                Application.modules
 *       /modules/{name}-{version}.zip           Application.download
-GET     /modules/{name}                         Application.module(format:'json')
+GET     /modules/{name}                         Application.module
+
+GET     /login                                  Security.login
+*       /authenticate                           Security.authenticate
 
 
 # Map static resources from the /app/public folder to the /public path

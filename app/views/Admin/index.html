@@ -1,7 +1,9 @@
 #{extends 'main.html' /}
 #{set title:'Modules List' /}
 
-<h1>List of Modules :</h1>
+<h1>Administration of Modules :</h1>
+
+<p><label>List of all modules</label> : #{a @Application.modules()}List#{/a}</p>
 
 #{list items:modules, as:'module'}
     <ul>

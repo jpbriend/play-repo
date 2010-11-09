@@ -1,0 +1,29 @@
+#{extends 'content.html' /}
+#{set title:'Module' /}
+
+<h1>${module.fullname} [${module.name}] module</h1>
+
+<p>${module.description}</p>
+
+<p><a href="${module.url}">${module.url}</a> , written by ${module.author}.</p>
+
+<h2>Published releases</h2>
+
+<p>To install one of these modules use the <strong>install</strong> command:</p>
+
+<pre><code>play install ${module.name}-{version}</code></pre>
+
+<p>Check the documentation link of each release to check version notes.</p>
+
+<table>
+    <tbody>
+        #{list items:module.versions, as:'version'}
+        <tr>
+            <td><strong>${module.name}-${version.version}</strong></td>
+            <td>${version.publicationDate}</td>
+            <td>Documentation</td>
+            <td>#{a @Application.download(module.name, version.version)}Download#{/a}</td>
+        </tr>
+        #{/list}
+    </tbody>
+</table>

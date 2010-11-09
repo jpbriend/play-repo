@@ -17,6 +17,12 @@ public class Module extends Model {
 
     public String fullname;
 
+    public String description;
+
+    public String url;
+
+    public String author;
+
     @OneToMany
     @Basic(fetch = FetchType.LAZY)
     public List<Version> versions;

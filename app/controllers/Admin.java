@@ -13,7 +13,9 @@ import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.db.jpa.Blob;
 import play.mvc.Controller;
+import play.mvc.With;
 
+@With(Security.class)
 public class Admin extends Controller {
     public static void index() {
         List<Module> modules = Module.findAll();

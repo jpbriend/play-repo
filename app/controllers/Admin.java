@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
 import models.Module;
+import models.Modules;
 import models.Version;
 import play.Logger;
 import play.data.validation.Required;
@@ -18,8 +18,9 @@ import play.mvc.With;
 @With(Security.class)
 public class Admin extends Controller {
     public static void index() {
-        List<Module> modules = Module.findAll();
-        Logger.info("Found " + modules.size() + " modules.");
+        Modules modules = new Modules();
+        modules.modules = Module.findAll();
+        Logger.info("Found " + modules.modules.size() + " modules.");
         render(modules);
     }
 

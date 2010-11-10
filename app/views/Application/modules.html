@@ -13,4 +13,7 @@
         <p>#{a @Application.module(module.name)}Get details and versions#{/a}</p>
     </div>
 #{/list}
+#{else}
+    <p>There is no module in this repository.</p>
+#{/else}
 </div>

@@ -1,29 +1,35 @@
-#{extends 'main.html' /}
+#{extends 'content.html' /}
 #{set title:'Modules List' /}
 
 <h1>Administration of Modules :</h1>
 
-<p><label>List of all modules</label> : #{a @Application.modules()}List#{/a}</p>
+<p>Here the complete list of all the modules hosted inside this repository.</p>
 
-#{list items:modules, as:'module'}
-    <ul>
-    <li><span>#{a @Admin.show(module.id)}${module.name} : ${module.fullname}#{/a}</span><span>&nbsp;#{a @Admin.delete(module.id)}<img width="16" height="16" src="@@{'/public/images/delete.png'}" alt="Delete" title="Delete" >#{/a}</span></li>
-    </ul>
-#{/list}    
+<div id="modules">
+#{list items:modules.modules, as:'module'}
+    <div class="module">
+        <h2>[${module.name}]&nbsp;${module.fullname} [#{a @Admin.delete(module.id)}Delete#{/a}]</h2>
+        <p>${module.description}</p>
+        <p>#{a @Application.module(module.name)}Get details and versions#{/a}</p>
+    </div>
+#{/list}
 #{else}
-    <label>There is no Module in this repository.</label>
+    <p>There is no module in this repository.</p>
 #{/else}
+</div>
+
+<h1>Admin actions :</h1>
 
 <div class="buttons"><button id="addModuleCommand" type="submit" class="positive">Add a module</button></div>
 
 <div id="addModule" style="display:none;">
 #{form @Admin.add()}
     <p>
-        <label>Name :</label>
+        <label>Enter the name of the module :</label>
         <input type="text" name="name" />
     </p>
     <p>
-        <label>Full Name :</label>
+        <label>Enter the full name :</label>
         <input type="text" name="fullname" />
     </p>
     <p>

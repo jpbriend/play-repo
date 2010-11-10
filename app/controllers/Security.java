@@ -10,6 +10,7 @@ public class Security extends Controller {
     @Before(unless = {"login", "authenticate" })
     static void checkAuthenticated() {
         if (!session.contains("user")) {
+            flash.error("You must be authenticated for this action.");
             login();
         }
     }
@@ -37,6 +38,11 @@ public class Security extends Controller {
                 login();
             }
         }
+    }
+
+    public static void logout() {
+        session.remove("user");
+        index();
     }
 
 }

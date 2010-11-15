@@ -1,7 +1,16 @@
 # you describe your data using the YAML notation here
 # and then load them using Fixtures.load("data.yml")
 
-# User(bob):
-#   email: bob@gmail.com
-#   password: secret
-#   fullname: Bob
+Version(TestVersion):
+    version: TestVersion
+    isDefault: true
+    matches: 1.1
+
+Module(test):
+    name: testModule
+    fullname: Test Module
+    author: Tester
+    description: Description for Test Module
+    url: http://test
+    versions:
+        - TestVersion

@@ -1,7 +1,31 @@
 *{ You can use plain selenium command using the selenium tag }*
 
-#{selenium}
+#{fixture delete:'all', load:'data.yml' /}
+
+#{selenium 'Test Homepage'}
+    clearSession()
+    
     // Open the home page, and check that no error occured
     open('/')
-    assertNotTitle('Application error')
+    assertTextPresent('This repository contains Play! modules.')
+    assertTextPresent('List the modules')
+    assertTextPresent('Administer the modules')
+#{/selenium}
+
+#{selenium 'Test Modules'}
+    clearSession()
+    
+    open('/modules')
+    assertTextPresent('List of modules')
+    assertTextPresent('Here the complete list of all the modules hosted inside this repository.')
+    assertTextPresent('testModule')
+#{/selenium}
+
+#{selenium 'Test Module'}
+    clearSession()
+    
+    open('/modules/testModule')
+    assertTextPresent('Test Module [testModule] module')
+    assertTextPresent('Published releases')
+    assertTextPresent('testModule-TestVersion')
 #{/selenium}

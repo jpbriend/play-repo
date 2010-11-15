@@ -1,6 +1,3 @@
-import models.Module;
-import models.Version;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,22 +12,7 @@ public class ApplicationTest extends FunctionalTest {
     public void setup() {
         Fixtures.deleteAll();
 
-        Module module = new Module();
-        module.name = "testModule";
-        module.fullname = "Test Module";
-        module.author = "Tester";
-        module.description = "Description for Test Module";
-        module.url = "http://test";
-        module.save();
-
-        Version version = new Version();
-        version.version = "TestVersion";
-        version.isDefault = true;
-        version.matches = "1.1";
-        version.save();
-
-        module.versions.add(version);
-        module.save();
+        Fixtures.load("data.yml");
     }
 
     /**

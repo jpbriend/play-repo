@@ -1,0 +1,41 @@
+*{ You can use plain selenium command using the selenium tag }*
+
+#{fixture delete:'all', load:'data.yml' /}
+
+#{selenium 'Test Bad Login'}
+    clearSession()
+
+    open('/')
+    assertTextPresent('This repository contains Play! modules.')
+    assertTextPresent('List the modules')
+    assertTextPresent('Administer the modules')
+    
+    clickAndWait('link=Login')
+    assertTextPresent('Please, authenticate yourself')
+    assertTextPresent('What's your OpenID?')
+    
+    type('user', 'toto')
+    clickAndWait('css=input[type=submit]')
+    assertTextPresent('Cannot verify your OpenID')
+    
+#{/selenium}
+
+#{selenium 'Test Good Login'}
+    clearSession()
+
+    open('/')
+    assertTextPresent('This repository contains Play! modules.')
+    assertTextPresent('List the modules')
+    assertTextPresent('Administer the modules')
+    
+    clickAndWait('link=Login')
+    assertTextPresent('Please, authenticate yourself')
+    assertTextPresent('What's your OpenID?')
+    
+    type('user', 'test')
+    clickAndWait('css=input[type=submit]')
+    assertTextPresent('This repository contains Play! modules.')
+    assertTextPresent('List the modules')
+    assertTextPresent('Administer the modules')
+    
+#{/selenium}

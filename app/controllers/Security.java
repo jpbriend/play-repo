@@ -1,5 +1,6 @@
 package controllers;
 
+import play.Play;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
 import play.mvc.Before;
@@ -24,18 +25,28 @@ public class Security extends Controller {
     }
 
     public static void authenticate(String user) {
-        if (OpenID.isAuthenticationResponse()) {
-            UserInfo verifiedUser = OpenID.getVerifiedID();
-            if (verifiedUser == null) {
-                flash.error("Oops. Authentication has failed");
-                login();
-            }
-            session.put("user", verifiedUser.id);
-            index();
-        } else {
-            if (!OpenID.id(user).verify()) { // will redirect the user
+        if (Play.id.equals("test")) {
+            if ("test".equalsIgnoreCase(user)) {
+                session.put("user", user);
+                index();
+            } else {
                 flash.error("Cannot verify your OpenID");
                 login();
+            }
+        } else {
+            if (OpenID.isAuthenticationResponse()) {
+                UserInfo verifiedUser = OpenID.getVerifiedID();
+                if (verifiedUser == null) {
+                    flash.error("Oops. Authentication has failed");
+                    login();
+                }
+                session.put("user", verifiedUser.id);
+                index();
+            } else {
+                if (!OpenID.id(user).verify()) { // will redirect the user
+                    flash.error("Cannot verify your OpenID");
+                    login();
+                }
             }
         }
     }

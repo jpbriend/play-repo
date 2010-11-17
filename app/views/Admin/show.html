@@ -1,39 +1,38 @@
-#{extends 'main.html' /}
-#{set title:'Module' /}
+#{extends 'content.html' /}
+#{set title:'Module Administration' /}
 
-<p>#{a @Admin.index()}Back to Module Administration index#{/a}</p>
+<h1>${module.fullname} [${module.name}] module</h1>
 
-<div>
-<h1>Module ${module.name}</h1>
-<h2>${module.fullname}</h2>
+<p>${module.description}</p>
 
-#{ifErrors}
-  <p class="error">Error(s) found :</p>
-#{/ifErrors}
-<ul class="error">
-#{errors}
-    <li>${error}</li>
-#{/errors}
-</ul>
+<p><a href="${module.url}">${module.url}</a> , written by ${module.author}.</p>
 
-<label>Versions :</label>
+<h2>Published releases</h2>
 
-#{if module.versions.size() > 0}
-    <ul>
-    #{list items:module.versions, as:'version'}
-        <li>${version.version}&nbsp;#{a @Admin.download(module.id, version.id)}Download#{/a}</li>
-    #{/list}
-    </ul>
+<p>To install one of these modules use the <strong>install</strong> command:</p>
 
-#{/if}
-#{else}
-    <label>No version available for this module.</label>
-#{/else}
+<pre><code>play install ${module.name}-{version}</code></pre>
 
-<div class="buttons"><button id="addVersionCommand" type="submit" class="positive">Add a Version</button></div>
+<p>Check the documentation link of each release to check version notes.</p>
+
+<table>
+    <tbody>
+        #{list items:module.versions, as:'version'}
+        <tr>
+            <td><strong>${module.name}-${version.version}</strong></td>
+            <td>${version.publicationDate}</td>
+            <td>Documentation</td>
+            <td>#{a @Application.download(module.name, version.version)}Download#{/a}</td>
+        </tr>
+        #{/list}
+    </tbody>
+</table>
+
+<h1>Admin actions :</h1>
+
+<div class="buttons"><button id="addVersionCommand" type="submit" class="positive">Add a version</button></div>
 
 <div id="addVersion" style="display:none;">
-
 <form action="@{Admin.addVersion()}" method="POST" enctype="multipart/form-data">
     <p>
         <label>Version :</label>
@@ -56,7 +55,6 @@
     <p>
         <input type="submit" value="Add" />
     </p>
-    
 </form>
 </div>
 
@@ -69,5 +67,3 @@
       }
     });
 </script>
-
-</div>

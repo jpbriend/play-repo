@@ -5,8 +5,8 @@
 GET     /admin/modules/?                        Admin.index
 *       /admin/modules/{action}                 Admin.{action}
 
-GET		/										Application.index
-GET     /modules                                Application.modules
+GET		/?										Application.index
+GET     /modules/?                              Application.modules
 *       /modules/{name}-{version}.zip           Application.download
 GET     /modules/{name}                         Application.module
 

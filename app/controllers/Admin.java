@@ -9,6 +9,7 @@ import models.Module;
 import models.Modules;
 import models.Version;
 import play.Logger;
+import play.Play;
 import play.data.validation.Required;
 import play.data.validation.Validation;
 import play.db.jpa.Blob;
@@ -53,39 +54,53 @@ public class Admin extends Controller {
 
     public static void addVersion(Long id, Version version, @Required File artefact) {
         notFoundIfNull(id);
+        notFoundIfNull(artefact);
 
         if (Validation.hasErrors()) {
             Logger.error("Error %s", validation.errorsMap());
             Validation.keep();
-        } else {
+            show(id);
+        }
 
-            Version v = Version.find("byVersion", version.version).first();
-            if (v != null) {
-                Validation.addError(version.version, "Version '%s' already exists.");
-                Validation.keep();
-            } else {
-                FileInputStream fis = null;
-                try {
-                    fis = new FileInputStream(artefact);
-                    version.artefact = new Blob();
-                    version.artefact.set(fis, "application/zip");
-                } catch (FileNotFoundException e) {
-                    Logger.error("Error while retrieving attachment :" + e.getMessage(), e);
-                } finally {
-                    if (fis != null) {
-                        try {
-                            fis.close();
-                        } catch (IOException e) {
-                            Logger.error("Error while retrieving attachment :" + e.getMessage(), e);
-                        }
+        Version v = Version.find("byVersion", version.version).first();
+        if (v != null) {
+            Validation.addError(version.version, "Version '%s' already exists.");
+            Validation.keep();
+        } else {
+            // Copy file to ${playrepo.data.path}
+            String path =
+                            (Play.configuration.getProperty("playrepo.data.path") == null ? "data" : Play.configuration
+                                            .getProperty("playrepo.data.path"));
+            new File(path).mkdir();
+
+            if (!path.endsWith(File.separator))
+                path = path + File.separator;
+
+            File newFile = Play.getFile(path + artefact.getName());
+            artefact.renameTo(newFile);
+            artefact.delete();
+
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(newFile);
+                version.artefact = new Blob();
+                version.artefact.set(fis, "application/zip");
+            } catch (FileNotFoundException e) {
+                Logger.error("Error while retrieving attachment :" + e.getMessage(), e);
+            } finally {
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        Logger.error("Error while retrieving attachment :" + e.getMessage(), e);
                     }
                 }
-
-                Module m = Module.findById(id);
-                m.versions.add(version);
-                version.save();
-                m.save();
             }
+
+            Module m = Module.findById(id);
+            m.versions.add(version);
+            version.save();
+            m.save();
         }
         show(id);
     }

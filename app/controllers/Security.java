@@ -3,18 +3,15 @@ package controllers;
 import play.Play;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
-import play.mvc.Before;
 import play.mvc.Controller;
 
 public class Security extends Controller {
 
-    @Before(unless = {"login", "authenticate" })
-    static void checkAuthenticated() {
-        if (!session.contains("user")) {
-            flash.error("You must be authenticated for this action.");
-            login();
-        }
-    }
+    /*
+     * @Before(unless = {"login", "authenticate" }) static void
+     * checkAuthenticated() { if (!session.contains("user")) {
+     * flash.error("You must be authenticated for this action."); login(); } }
+     */
 
     public static void index() {
         Application.index();

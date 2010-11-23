@@ -3,18 +3,17 @@ package controllers;
 import play.Play;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
+import play.mvc.Before;
 import play.mvc.Controller;
 
 public class Security extends Controller {
 
-    /*
-     * @Before(unless = {"login", "authenticate" }) static void
-     * checkAuthenticated() { if (!session.contains("user")) {
-     * flash.error("You must be authenticated for this action."); login(); } }
-     */
-
-    public static void index() {
-        Application.index();
+    @Before(unless = {"login", "authenticate", "logout" })
+    public static void checkAuthenticated() {
+        if (!session.contains("user")) {
+            flash.error("You must be authenticated for this action.");
+            login();
+        }
     }
 
     public static void login() {
@@ -25,7 +24,7 @@ public class Security extends Controller {
         if (Play.id.equals("test")) {
             if ("test".equalsIgnoreCase(user)) {
                 session.put("user", user);
-                index();
+                Application.index();
             } else {
                 flash.error("Cannot verify your OpenID");
                 login();
@@ -38,7 +37,7 @@ public class Security extends Controller {
                     login();
                 }
                 session.put("user", verifiedUser.id);
-                index();
+                Application.index();
             } else {
                 if (!OpenID.id(user).verify()) { // will redirect the user
                     flash.error("Cannot verify your OpenID");
@@ -50,7 +49,7 @@ public class Security extends Controller {
 
     public static void logout() {
         session.remove("user");
-        index();
+        Application.index();
     }
 
 }

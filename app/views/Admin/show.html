@@ -30,30 +30,43 @@
 
 <h1>Admin actions :</h1>
 
-<div class="buttons"><button id="addVersionCommand" type="submit" class="positive">Add a version</button></div>
+<button id="addVersionCommand" class="buttons" type="submit" class="positive">Add a version</button>
 
 <div id="addVersion" style="display:none;">
 <form action="@{Admin.addVersion()}" method="POST" enctype="multipart/form-data">
     <p>
-        <label>Version :</label>
-        <input type="text" name="version.version" />
-        <input type="hidden" name="id" value="${module.id}" />
+        <div>
+            <label>Version :</label>
+        </div>
+        <div>
+            <input type="text" name="version.version" />
+            <input type="hidden" name="id" value="${module.id}" />
+        </div>
     </p>
     <p>
-        <label>Is Default :</label>
+        <div>
+            <label>Is Default :</label>
+        </div>
         <div><input type="radio" id="isDefaultTrue" name="version.isDefault" value="true"/><label for="isDefaultTrue">True</label></div>
         <div><input type="radio" id="isDefaultFalse" name="version.isDefault" value="false" /><label for="isDefaultFalse">False</label></div>
     </p>
     <p>
-        <label>Matches version of Play! framework:</label>
-        <input type="text" name="version.matches" />
+        <div>
+            <label>Matches version of Play! framework:</label>
+        </div>
+        <div>
+            <input type="text" name="version.matches" />
+        </div>
     </p>
     <p>
-        <label>Artefact:</label>
-        <input type="file" name="artefact" />
-    </p>
-    <p>
-        <input type="submit" value="Add" />
+        <div>
+            <label>Artefact:</label>
+        </div>
+        <div>
+            <input type="file" name="artefact" />
+            <span id="submit"><button id="addMVersionSubmit" class="buttons" type="submit" class="positive">Add</button></span>
+        </div>
+        
     </p>
 </form>
 </div>

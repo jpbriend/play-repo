@@ -20,22 +20,27 @@
 
 <h1>Admin actions :</h1>
 
-<div class="buttons"><button id="addModuleCommand" type="submit" class="positive">Add a module</button></div>
+<button id="addModuleCommand" class="buttons" type="submit" class="positive">Add a module</button>
 
 <div id="addModule" style="display:none;">
 #{form @Admin.add()}
     <p>
+    <div>
         <label>Enter the name of the module :</label>
+    </div>
+    <div>
         <input type="text" name="name" />
+    </div>
     </p>
     <p>
+    <div>
         <label>Enter the full name :</label>
+    </div>
+    <div>
         <input type="text" name="fullname" />
+        <span id="submit"><button id="addModuleSubmit" class="buttons" type="submit" class="positive">Add</button></span>
+    </div>
     </p>
-    <p>
-        <input type="submit" value="Add" />
-    </p>
-    
 #{/form}
 </div>
 

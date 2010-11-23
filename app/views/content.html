@@ -13,17 +13,17 @@
             <p>Welcome ${session.get("user")}</p><BR/>
         #{/if}
         <ul class="sidemenu">
-            <li>#{a @Application.index()}Home#{/a}</li>
+            <li>#{a @@Application.index()}Home#{/a}</li>
             <li>#{a @Application.modules()}List all the modules#{/a}</li>
             <li>#{a @Admin.index()}Admin#{/a}</li>
         </ul>
         <br />
         <ul class="sidemenu">
             #{if !session.contains("user")}
-                <li>#{a @Security.login()}Login#{/a}</li>
+                <li>#{a @@Security.login()}Login#{/a}</li>
             #{/if}
             #{else}
-                <li>#{a @Security.logout()}Logout#{/a}</li>
+                <li>#{a @@Security.logout()}Logout#{/a}</li>
             #{/else}
         </ul>
     </div>

@@ -5,17 +5,16 @@
 GET     /admin/modules/?                        Admin.index
 *       /admin/modules/{action}                 Admin.{action}
 
-GET		/?										Application.index
 GET     /modules/?                              Application.modules
 *       /modules/{name}-{version}.zip           Application.download
 GET     /modules/{name}                         Application.module
 
-GET     /login                                  Security.login
-*       /authenticate                           Security.authenticate
-
+*       /security/{action}/?                    Security.{action}
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
+
+GET     /                                       Application.index
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}

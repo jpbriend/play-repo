@@ -1,4 +1,4 @@
-package controllers;
+
 
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;

@@ -11,6 +11,7 @@ import models.Version;
 import play.Logger;
 import play.Play;
 import play.data.validation.Required;
+import play.data.validation.Valid;
 import play.data.validation.Validation;
 import play.db.jpa.Blob;
 import play.mvc.Controller;
@@ -32,9 +33,19 @@ public class Admin extends Controller {
     }
 
     public static void add(String name, String fullname) {
+        validation.required(name);
+        validation.required(fullname);
+
+        if (Validation.hasErrors()) {
+            params.flash(); // add http parameters to the flash scope
+            Validation.keep(); // keep the errors for the next request
+            index();
+        }
+
         Module m = Module.find("byName", name).first();
         if (m != null) {
-            Validation.addError(name, "Module '%s' already exists.");
+            Validation.addError("other", "Module '%s' already exists.");
+            params.flash(); // add http parameters to the flash scope
             Validation.keep();
         } else {
             m = new Module();
@@ -52,11 +63,11 @@ public class Admin extends Controller {
         index();
     }
 
-    public static void addVersion(Long id, Version version, @Required File artefact) {
+    public static void addVersion(Long id, @Valid Version version, @Required File artefact) {
         notFoundIfNull(id);
-        notFoundIfNull(artefact);
 
         if (Validation.hasErrors()) {
+            params.flash();
             Logger.error("Error %s", validation.errorsMap());
             Validation.keep();
             show(id);

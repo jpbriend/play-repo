@@ -30,16 +30,18 @@
 
 <h1>Admin actions :</h1>
 
-<button id="addVersionCommand" class="buttons" type="submit" class="positive">Add a version</button>
+<!-- <button id="addVersionCommand" class="buttons" type="submit" class="positive">Add a version</button> -->
+<h2>Add a version :</h2>
 
-<div id="addVersion" style="display:none;">
+<div id="addVersion"><!-- style="display:none;" -->
 <form action="@{Admin.addVersion()}" method="POST" enctype="multipart/form-data">
     <p>
         <div>
             <label>Version :</label>
         </div>
         <div>
-            <input type="text" name="version.version" />
+            <input type="text" name="version.version" value="${flash.version?.version}" />
+            <span class="error">#{error 'version.version' /}</span>
             <input type="hidden" name="id" value="${module.id}" />
         </div>
     </p>
@@ -55,7 +57,8 @@
             <label>Matches version of Play! framework:</label>
         </div>
         <div>
-            <input type="text" name="version.matches" />
+            <input type="text" name="version.matches" value="${flash.version?.matches}" />
+            <span class="error">#{error 'version.matches' /}</span>
         </div>
     </p>
     <p>
@@ -64,6 +67,7 @@
         </div>
         <div>
             <input type="file" name="artefact" />
+            <span class="error">#{error 'artefact' /}</span>
             <span id="submit"><button id="addMVersionSubmit" class="buttons" type="submit" class="positive">Add</button></span>
         </div>
         

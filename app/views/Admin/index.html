@@ -20,16 +20,19 @@
 
 <h1>Admin actions :</h1>
 
-<button id="addModuleCommand" class="buttons" type="submit" class="positive">Add a module</button>
+<!-- <button id="addModuleCommand" class="buttons" type="submit" class="positive">Add a module</button> -->
+<h2>Add a module :</h2>
 
-<div id="addModule" style="display:none;">
+<div id="addModule" ><!-- style="display:none;" -->
 #{form @Admin.add()}
     <p>
     <div>
         <label>Enter the name of the module :</label>
     </div>
     <div>
-        <input type="text" name="name" />
+        <input type="text" name="name" value="${flash.name}" />
+        <span class="error">#{error 'name' /}</span>
+        <span class="error">#{error 'other' /}</span>
     </div>
     </p>
     <p>
@@ -37,7 +40,8 @@
         <label>Enter the full name :</label>
     </div>
     <div>
-        <input type="text" name="fullname" />
+        <input type="text" name="fullname" value="${flash.fullname}" />
+        <span class="error">#{error 'fullname' /}</span>
         <span id="submit"><button id="addModuleSubmit" class="buttons" type="submit" class="positive">Add</button></span>
     </div>
     </p>

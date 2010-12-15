@@ -11,6 +11,8 @@ GET     /modules/{name}                         Application.module
 
 *       /security/{action}/?                    Security.{action}
 
+*       /wikitext/renderPreview                 Wikitext.renderPreview
+
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 

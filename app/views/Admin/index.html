@@ -1,6 +1,20 @@
 #{extends 'content.html' /}
 #{set title:'Modules List' /}
 
+<!--  Loading Markitup -->
+<link rel="stylesheet" type="text/css" href="@{'/public/markitup/skins/markitup/style.css'}" />
+<script type="text/javascript" src="@{'/public/markitup/jquery.markitup.js'}"></script>
+
+<link rel="stylesheet" type="text/css" href="@{'/public/markitup/sets/textile/style.css'}" />
+<script type="text/javascript" src="@{'/public/markitup/sets/textile/set.js'}"></script>
+
+<script language="javascript">
+$(document).ready(function()    {
+    $('#wiki').markItUp(mySettings);
+});
+</script>
+<!-- End markitup -->
+
 <h1>Administration of Modules :</h1>
 
 <p>Here the complete list of all the modules hosted inside this repository.</p>
@@ -9,7 +23,7 @@
 #{list items:modules.modules, as:'module'}
     <div class="module">
         <h2>[${module.name}]&nbsp;${module.fullname} [#{a @Admin.delete(module.id)}Delete#{/a}]</h2>
-        <p>${module.description}</p>
+        <p>${controllers.Wikitext.render(module.description).raw()}</p>
         <p>#{a @Admin.show(module.id)}Get details and versions#{/a}</p>
     </div>
 #{/list}
@@ -42,6 +56,14 @@
     <div>
         <input type="text" name="fullname" value="${flash.fullname}" />
         <span class="error">#{error 'fullname' /}</span>
+    </div>
+    <div>
+        <label>Description (optional) :</label>
+    </div>
+    <div>
+        <textarea id="wiki" name="description" cols="70" rows="20">
+            ...wiki stuff...
+        </textarea>
         <span id="submit"><button id="addModuleSubmit" class="buttons" type="submit" class="positive">Add</button></span>
     </div>
     </p>

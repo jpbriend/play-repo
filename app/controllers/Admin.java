@@ -32,7 +32,7 @@ public class Admin extends Controller {
         render(module);
     }
 
-    public static void add(String name, String fullname) {
+    public static void add(String name, String fullname, String description) {
         validation.required(name);
         validation.required(fullname);
 
@@ -51,6 +51,7 @@ public class Admin extends Controller {
             m = new Module();
             m.name = name;
             m.fullname = fullname;
+            m.description = description;
             m.save();
         }
         index();

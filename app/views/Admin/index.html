@@ -35,11 +35,11 @@ $(document).ready(function()    {
 <h1>Admin actions :</h1>
 
 <!-- <button id="addModuleCommand" class="buttons" type="submit" class="positive">Add a module</button> -->
-<h2>Add a module :</h2>
+<h2 id="addModuleCommand" class="command">Add a module</h2>
 
-<div id="addModule" ><!-- style="display:none;" -->
+<div id="addModule" style="display:none;">
 #{form @Admin.add()}
-    <p>
+    
     <div>
         <label>Enter the name of the module :</label>
     </div>
@@ -48,8 +48,6 @@ $(document).ready(function()    {
         <span class="error">#{error 'name' /}</span>
         <span class="error">#{error 'other' /}</span>
     </div>
-    </p>
-    <p>
     <div>
         <label>Enter the full name :</label>
     </div>
@@ -58,15 +56,22 @@ $(document).ready(function()    {
         <span class="error">#{error 'fullname' /}</span>
     </div>
     <div>
+        <label>Enter the author :</label>
+    </div>
+    <div>
+        <input type="text" name="author" value="${flash.author}" />
+        <span class="error">#{error 'author' /}</span>
+    </div>
+    <div>
         <label>Description (optional) :</label>
     </div>
     <div>
         <textarea id="wiki" name="description" cols="70" rows="20">
-            ...wiki stuff...
+            Description ...
         </textarea>
         <span id="submit"><button id="addModuleSubmit" class="buttons" type="submit" class="positive">Add</button></span>
     </div>
-    </p>
+    
 #{/form}
 </div>
 

@@ -594,7 +594,7 @@ a:hover {
 a.buttons, button.buttons {
     margin:0 7px 0 0;
     background-color:#f5f5f5;
-    border:1px solid #bebebe;
+    border:1px solid #565656;
     border-top:1px solid #ddd;
     border-left:1px solid #ddd;
 
@@ -624,10 +624,10 @@ button[type].buttons {
 #addModule form, #addVersion form {
 	padding: 0 5px;
 	margin: 10px;
-    border: 1px solid #aaa;
+    /**border: 1px solid #aaa;
     border-radius: 5px;
     -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+    -webkit-border-radius: 5px;*/
 }
 
 #addModule div input, #addVersion div input {
@@ -635,8 +635,13 @@ button[type].buttons {
 }
 
 #addModule #submit button, #addVersion #submit button {
-    float: right;
+    float: left;
     vertical-align: middle;
     margin-top: 5px;
     margin-bottom: 10px;
+}
+
+.command {
+    cursor: pointer;
+    text-decoration: underline;	
 }

@@ -13,11 +13,8 @@ public class Wikitext extends Controller {
     public static void renderPreview(String wiki) {
         StringWriter writer = new StringWriter();
         HtmlDocumentBuilder builder = new HtmlDocumentBuilder(writer);
-        // avoid the <html> and <body> tags
-        // builder.setEmitAsDocument(false);
+
         Stylesheet css = new Stylesheet("/public/stylesheets/main.css");
-        builder.addCssStylesheet(css);
-        css = new Stylesheet("/public/stylesheets/wiki.css");
         builder.addCssStylesheet(css);
 
         MarkupParser parser = new MarkupParser(new TextileLanguage());

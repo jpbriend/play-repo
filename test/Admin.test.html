@@ -17,7 +17,6 @@
     type('user', 'toto')
     clickAndWait('css=input[type=submit]')
     assertTextPresent('Cannot verify your OpenID')
-    
 #{/selenium}
 
 #{selenium 'Test Good Login'}
@@ -34,8 +33,35 @@
     
     type('user', 'test')
     clickAndWait('css=input[type=submit]')
-    assertTextPresent('This repository contains Play! modules.')
     assertTextPresent('List the modules')
     assertTextPresent('Administer the modules')
-    
+    clickAndWait('link=Admin')
+    assertTextPresent('Admin actions')
+#{/selenium}
+
+#{selenium 'New Version OK'}
+    clearSession()
+
+    open('/')
+    assertTextPresent('Administer the modules')
+
+    clickAndWait('link=Login')
+    assertTextPresent('What's your OpenID?')
+
+    type('user', 'test')
+    clickAndWait('css=input[type=submit]')
+    clickAndWait('link=Admin')
+    assertTextPresent('Admin actions')
+
+    click('css=h2[id=addModuleCommand]')
+    assertTextPresent('Enter the name of the module :')
+
+    type('name', 'module1')
+    type('fullname', 'module1 for test')
+    type('author', 'selenium')
+    type('description', 'Description of module 1')
+    clickAndWait('css=button[id=addModuleSubmit]')
+    assertTextPresent('[module1] module1 for test')
+    assertTextPresent('Description of module 1')
+
 #{/selenium}

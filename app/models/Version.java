@@ -21,6 +21,5 @@ public class Version extends Model {
     @Required
     public String matches;
 
-    @Required
     public Blob artefact;
 }

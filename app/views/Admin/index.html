@@ -41,34 +41,32 @@ $(document).ready(function()    {
 #{form @Admin.add()}
     
     <div>
-        <label>Enter the name of the module :</label>
+        <label for="name">Enter the name of the module :</label>
     </div>
     <div>
-        <input type="text" name="name" value="${flash.name}" />
+        <input type="text" id="name" name="name" value="${flash.name}" />
         <span class="error">#{error 'name' /}</span>
         <span class="error">#{error 'other' /}</span>
     </div>
     <div>
-        <label>Enter the full name :</label>
+        <label for="fullname">Enter the full name :</label>
     </div>
     <div>
-        <input type="text" name="fullname" value="${flash.fullname}" />
+        <input type="text" id="fullname" name="fullname" value="${flash.fullname}" />
         <span class="error">#{error 'fullname' /}</span>
     </div>
     <div>
-        <label>Enter the author :</label>
+        <label for="author">Enter the author :</label>
     </div>
     <div>
-        <input type="text" name="author" value="${flash.author}" />
+        <input type="text" id="author" name="author" value="${flash.author}" />
         <span class="error">#{error 'author' /}</span>
     </div>
     <div>
-        <label>Description (optional) :</label>
+        <label for="wiki">Description (optional) :</label>
     </div>
     <div>
-        <textarea id="wiki" name="description" cols="70" rows="20">
-            Description ...
-        </textarea>
+        <textarea id="wiki" name="description" cols="70" rows="20">Description ...</textarea>
         <span id="submit"><button id="addModuleSubmit" class="buttons" type="submit" class="positive">Add</button></span>
     </div>
     
